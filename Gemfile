@@ -10,10 +10,23 @@ end
 
 gem 'jquery-rails'
 
-group :development do
-  gem 'sqlite3'
-end
-
 group :production do
   gem 'pg'
+end
+
+group :development do
+  gem 'sqlite3'
+  gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'annotate', ">=2.5.0"
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'rb-fsevent', require: false
+  gem 'growl'
+  gem 'guard-spork'
+  gem 'spork'
+  gem 'factory_girl_rails'
 end
