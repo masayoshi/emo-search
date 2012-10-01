@@ -32,6 +32,7 @@ GEM
     annotate (2.5.0)
       rake
     arel (3.0.2)
+    bootstrap-sass (2.1.0.0)
     builder (3.0.3)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -59,6 +60,9 @@ GEM
       factory_girl (~> 4.1.0)
       railties (>= 3.0.0)
     ffi (1.1.5)
+    font-awesome-sass-rails (2.0.0.0)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     growl (1.0.3)
     guard (1.4.0)
       listen (>= 0.4.2)
@@ -164,9 +168,11 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (>= 2.5.0)
+  bootstrap-sass
   capybara
   coffee-rails (~> 3.2.1)
   factory_girl_rails
+  font-awesome-sass-rails
   growl
   guard-rspec
   guard-spork
