@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.8'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass-rails'
+gem 'devise'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
