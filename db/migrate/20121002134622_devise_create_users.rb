@@ -27,6 +27,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       ## Additional Column
       t.string :username
+      t.string :image_url
 
       t.timestamps
     end
