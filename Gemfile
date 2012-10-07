@@ -6,6 +6,7 @@ gem 'font-awesome-sass-rails'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
