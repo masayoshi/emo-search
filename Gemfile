@@ -11,6 +11,7 @@ gem 'nokogiri'
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
 gem 'acts-as-taggable-on'
+gem 'feedzirra'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

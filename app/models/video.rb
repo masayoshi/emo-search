@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*
 require 'open-uri'
 
 class Video < ActiveRecord::Base
@@ -10,6 +11,8 @@ class Video < ActiveRecord::Base
   validates :thumbnail_url, format: {with: URI::regexp(%w(http https))}
   validates :watch_url, format: {with: URI::regexp(%w(http https))}
 
+  default_scope order: 'first_retrieve DESC'
+
   # apply nico video attributes when create
   before_validation :apply_attributes, on: :create
 
@@ -19,7 +22,7 @@ class Video < ActiveRecord::Base
 
   def apply_attributes
     xml = Nokogiri::XML(open(THUMBINFO_BASE_URL + self.nicovideo_id))
-    if nicovideo_api_response_is_valid?(xml)
+    if nicovideo_api_response_is_valid?(xml) && validate_video_category?(xml)
       self.title = xml.xpath('//title').inner_text
       self.description = xml.xpath('//description').inner_text
       self.thumbnail_url = xml.xpath('//thumbnail_url').inner_text
@@ -38,6 +41,15 @@ class Video < ActiveRecord::Base
 
   def nicovideo_api_response_is_valid?(response_xml)
     if response_xml.at_css('nicovideo_thumb_response')["status"] == "ok"
+      return true
+    else
+      return false
+    end
+  end
+
+  def validate_video_category?(response_xml)
+    tag_list = response_xml.xpath('//tags[contains(@domain, "jp")]//tag').map{|tag| tag.text }.join(",")
+    if tag_list.include?("VOCALOID") || tag_list.include?("ニコニコインディーズ")
       return true
     else
       return false

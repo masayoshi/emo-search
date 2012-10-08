@@ -24,6 +24,7 @@
     <% end %>    <div class="nav-collapse collapse">
       <ul class="nav">
         <li<%= ' class="active"'.html_safe if current_page?(root_path) %>><%= link_to "Home", root_path %></li>
+        <li<%= ' class="active"'.html_safe if current_page?(videos_path) %>><%= link_to "Videos", videos_path %></li>
         <li<%= ' class="active"'.html_safe if current_page?(about_path) %>><%= link_to "About", about_path %></li>
       </ul>
     </div><!--/.nav-collapse -->
