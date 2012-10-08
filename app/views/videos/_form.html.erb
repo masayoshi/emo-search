@@ -1,0 +1,4 @@
+<%= form_tag videos_path, method: :post, class: "form-inline" do %>
+  <%= text_field_tag :nicovideo_id , nil, placeholder: "Niconico Video ID", class: "input-medium"%>
+  <%= submit_tag "Register Video", class: "btn" %>
+<% end %>

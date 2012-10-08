@@ -7,6 +7,10 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
+gem 'nokogiri'
+gem 'will_paginate', '~> 3.0'
+gem 'bootstrap-will_paginate'
+gem 'acts-as-taggable-on'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
