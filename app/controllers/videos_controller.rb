@@ -2,7 +2,11 @@ class VideosController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
 
   def index
-    @videos = Video.paginate(page: params[:page])
+    if params[:tag]
+      @videos = Video.tagged_with(params[:tag]).paginate(page: params[:page])
+    else
+      @videos = Video.paginate(page: params[:page])
+    end
 
     respond_to do |format|
       format.html # index.html.erb

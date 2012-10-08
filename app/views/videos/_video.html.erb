@@ -3,8 +3,16 @@
     <%= link_to image_tag(video.thumbnail_url, alt:video.title), video_path(video), class: "thumbnail"%>
   </div>
   <div class="span10">
-    <h5><%= link_to video.title, video_path(video) %></h5>
-    <p><%= truncate(video.description, length:200) %></p>
-    <h6><%= video.first_retrieve %> に投稿</h6>
+    <h4><%= link_to video.title, video_path(video) %></h4>
+    <% video.nicovideo_tags.each do |tag| %>
+      <%= link_to tag.name, tag_path(tag.name), class: "label" %>
+    <% end %>
+    <p>
+    <blockquote>
+      <%= truncate(video.description, length:150) %>
+      <small><%= video.first_retrieve.to_s(:db) %> ( <%= time_ago_in_words video.first_retrieve %> 前に投稿 )</small>
+    </blockquote>
+    </p>
   </div>
 </div><!--/row-->
+<hr />

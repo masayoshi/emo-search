@@ -4,6 +4,9 @@
       <h1>Listing Videos</h1>
     </div>
     <%= render 'form' if current_user.present? %>
+    <% if params[:tag] %>
+      <p>Tagged with : <span class="label"><%= params[:tag] %><span></p>
+    <% end %>
     <%= render @videos %>
     <%= will_paginate @videos %>
   </div>

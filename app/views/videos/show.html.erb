@@ -1,62 +1,75 @@
-
-<p>
-  <b>Nicovideo:</b>
-  <%= @video.nicovideo_id %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @video.title %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @video.description %>
-</p>
-
-<p>
-  <b>Thumbnail url:</b>
-  <%= @video.thumbnail_url %>
-</p>
-
-<p>
-  <b>First retrieve:</b>
-  <%= @video.first_retrieve %>
-</p>
-
-<p>
-  <b>Length:</b>
-  <%= @video.length %>
-</p>
-
-<p>
-  <b>View counter:</b>
-  <%= @video.view_counter %>
-</p>
-
-<p>
-  <b>Comment num:</b>
-  <%= @video.comment_num %>
-</p>
-
-<p>
-  <b>Mylist counter:</b>
-  <%= @video.mylist_counter %>
-</p>
-
-<p>
-  <b>Watch url:</b>
-  <%= @video.watch_url %>
-</p>
-
-<p>
-  <b>Nicovideo user:</b>
-  <%= @video.nicovideo_user_id %>
-</p>
-
-<p>
-  <b>Nicovideo Tags:</b>
-  <%= @video.nicovideo_tag_list %>
-</p>
-
-<%= link_to 'Back', videos_path %>
+<div class="page-header">
+  <h1><%= @video.title %><small><%= @video.nicovideo_id %></small></h1>
+  <h2><small>再生数</small> <%= @video.view_counter %>  <small>コメント数</small> <%= @video.comment_num %>  <small>マイリスト登録数</small> <%= @video.mylist_counter %></h2>
+</div>
+<div class="row-fluid">
+  <div class="span12">
+    <% @video.nicovideo_tags.each do |tag| %>
+      <%= link_to tag.name, tag_path(tag.name), class: "label" %>
+    <% end %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12" align="center">
+    <div class="well">
+      <%= nico_video_player @video %>
+    </div>
+  </div>
+</div>
+<div class="page-header">
+  <h2>Information <small>動画情報</small></h2>
+</div>
+<div class="row-fluid">
+  <div class="span2">
+    <p align="center"><strong>タイトル</strong></p>
+  </div>
+  <div class="span10">
+    <p><%= link_to @video.title, @video.watch_url, target: "_blank" %></p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span2">
+    <p align="center"><strong>動画ID</strong></p>
+  </div>
+  <div class="span10">
+    <p><%= link_to @video.nicovideo_id, @video.watch_url, target: "_blank" %></p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span2">
+    <p align="center"><strong>タグ</strong></p>
+  </div>
+  <div class="span10">
+    <p>
+    <% @video.nicovideo_tags.each do |tag| %>
+      <%= link_to tag.name, "http://www.nicovideo.jp/tag/#{tag.name}", class: "label", target: "_blank" %>
+    <% end %>
+    </p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span2">
+    <p align="center"><strong>説明文</strong></p>
+  </div>
+  <div class="span10">
+    <div class="well">
+      <%= @video.description %>
+    </div>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span2">
+    <p align="center"><strong>再生時間</strong></p>
+  </div>
+  <div class="span10">
+    <p><%= @video.length %></p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span2">
+    <p align="center"><strong>投稿日時</strong></p>
+  </div>
+  <div class="span10">
+    <p><%= @video.first_retrieve.to_s(:db) %> ( <%= time_ago_in_words @video.first_retrieve %> 前に投稿 )</p>
+  </div>
+</div>
