@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: videos
+#
+#  id                :integer          not null, primary key
+#  nicovideo_id      :string(255)      not null
+#  title             :string(255)      not null
+#  description       :text             not null
+#  thumbnail_url     :string(255)      not null
+#  first_retrieve    :datetime         not null
+#  length            :string(255)      not null
+#  view_counter      :integer          not null
+#  comment_num       :integer          not null
+#  mylist_counter    :integer          not null
+#  watch_url         :string(255)      not null
+#  nicovideo_user_id :string(255)      not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
 # -*- encoding: utf-8 -*
 require 'open-uri'
 
