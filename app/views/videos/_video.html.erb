@@ -3,9 +3,13 @@
     <%= link_to image_tag(video.thumbnail_url, alt:video.title), video_path(video), class: "thumbnail"%>
   </div>
   <div class="span10">
-    <h4><%= link_to video.title, video_path(video) %></h4>
+    <h4><%= link_to video.title.html_safe, video_path(video) %></h4>
     <% video.nicovideo_tags.each do |tag| %>
-      <%= link_to tag.name, tag_path(tag.name), class: "label" %>
+      <% if params[:tags].present? && params[:tags].split("+").include?(tag.name) %>
+        <span class="label label-info"><%= tag.name.html_safe %></span>
+      <% else %>
+        <%= link_to tag.name.html_safe, tagged_videos_path(tag.name), class: "label" %>
+      <% end %>
     <% end %>
     <p>
     <blockquote>

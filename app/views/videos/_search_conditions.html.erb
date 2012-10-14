@@ -1,0 +1,14 @@
+<div class="well">
+  <% if params[:sort] %>
+    <span class="label"><%= readable_sort_condition(params[:sort]) %> <%= link_to "x", remove_sort_videos_path, class: "label-close" %></span>
+  <% end %>
+  <% if params[:range] %>
+    <span class="label"><%= readable_range_condition(params[:range]) %> <%= link_to "x", remove_range_videos_path, class: "label-close" %></span>
+  <% end %>
+  <%= tag "br" if params[:sort].present? || params[:range].present? %>
+  <% if params[:tags] %>
+    <% params[:tags].split("+").each do |tag| %>
+      <span class="label label-info"><%= tag.html_safe %> <%= link_to "x", remove_tag_path(tag), class: "label-close" %></span>
+    <% end %>
+  <% end %>
+</div>

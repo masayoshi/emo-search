@@ -1,0 +1,44 @@
+<%= render 'form' if current_user.present? %>
+<div class="well">
+  <div class="btn-toolbar">
+  <div class="btn-group">
+    <button class="btn btn-small">表示順</button>
+    <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <!-- dropdown menu links -->
+      <li><%= link_to "登録日時が新しい順", sort_videos_path("fd") %></li>
+      <li><%= link_to "登録日時が古い順", sort_videos_path("fa") %></li>
+      <li><%= link_to "再生数が多い順", sort_videos_path("vd")  %></li>
+      <li><%= link_to "再生数が古い順", sort_videos_path("va")  %></li>
+      <li><%= link_to "コメント数が多い順", sort_videos_path("cd")  %></li>
+      <li><%= link_to "コメント数が少ない順", sort_videos_path("ca")  %></li>
+      <li><%= link_to "マイリスト数が多い順", sort_videos_path("md")  %></li>
+      <li><%= link_to "マイリスト数が少ない順", sort_videos_path("ma")  %></li>
+    </ul>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-small">投稿日時</button>
+    <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <!-- dropdown menu links -->
+      <li><%= link_to "24時間以内", range_scoped_videos_path("day") %></li>
+      <li><%= link_to "1週間以内", range_scoped_videos_path("week") %></li>
+      <li><%= link_to "1ヶ月以内", range_scoped_videos_path("month") %></li>
+    </ul>
+  </div>
+</div>
+  <hr />
+  <ul class="unstyled">
+    <% @tags.each do |tag| %>
+      <% if params[:tags].present? && params[:tags].split("+").include?(tag.name) %>
+        <li><span class="label label-info"><%= tag.name.html_safe %></span></li>
+      <% else %>
+        <li><%= link_to tag.name.html_safe, additional_tag_path(tag.name), class: "label" %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

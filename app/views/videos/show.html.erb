@@ -1,11 +1,10 @@
 <div class="page-header">
-  <h1><%= @video.title %><small><%= @video.nicovideo_id %></small></h1>
-  <h2><small>再生数</small> <%= @video.view_counter %>  <small>コメント数</small> <%= @video.comment_num %>  <small>マイリスト登録数</small> <%= @video.mylist_counter %></h2>
+  <h1><%= @video.title.html_safe %><small><%= @video.nicovideo_id %></small></h1>
 </div>
 <div class="row-fluid">
   <div class="span12">
     <% @video.nicovideo_tags.each do |tag| %>
-      <%= link_to tag.name, tag_path(tag.name), class: "label" %>
+      <%= link_to tag.name.html_safe, tagged_videos_path(tag.name), class: "label" %>
     <% end %>
   </div>
 </div>
@@ -67,9 +66,28 @@
 </div>
 <div class="row-fluid">
   <div class="span2">
+    <p align="center"><strong>カウンター</strong></p>
+  </div>
+  <div class="span10">
+    <p><b>再生数:</b> <%= @video.view_counter %> <b>コメント数:</b> <%= @video.comment_num %> <b>マイリスト登録数:</b> <%= @video.mylist_counter %></p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span2">
     <p align="center"><strong>投稿日時</strong></p>
   </div>
   <div class="span10">
     <p><%= @video.first_retrieve.to_s(:db) %> ( <%= time_ago_in_words @video.first_retrieve %> 前に投稿 )</p>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span2">
+    <p align="center"><strong>最終更新日</strong></p>
+  </div>
+  <div class="span10">
+    <p>
+    <%= @video.updated_at.to_s(:db) %> ( <%= time_ago_in_words @video.updated_at %> 前に更新 )
+    <%= link_to "最新情報に更新", @video, method: :put, class: "btn btn-small btn-info" if current_user.present? %>
+    </p>
   </div>
 </div>
