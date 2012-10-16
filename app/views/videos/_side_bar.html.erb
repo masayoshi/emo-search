@@ -32,13 +32,11 @@
   </div>
 </div>
   <hr />
-  <ul class="unstyled">
-    <% @tags.each do |tag| %>
-      <% if params[:tags].present? && params[:tags].split("+").include?(tag.name) %>
-        <li><span class="label label-info"><%= tag.name.html_safe %></span></li>
-      <% else %>
-        <li><%= link_to tag.name.html_safe, additional_tag_path(tag.name), class: "label" %></li>
-      <% end %>
+  <% tag_cloud(@tags, ["label", "label label-success", "label label-warning", "label label-important"]) do |tag, css_class| %>
+    <% if params[:tags].present? && params[:tags].split("+").include?(tag.name) %>
+      <span class="label label-info"><%= tag.name.html_safe %></span>
+    <% else %>
+      <%= link_to tag.name, additional_tag_path(tag.name), class: css_class %>
     <% end %>
-  </ul>
+  <% end %>
 </div>
